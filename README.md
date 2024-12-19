@@ -1,8 +1,10 @@
 # OpenDraw
 
-OpenDraw is a code based drawing tool. It's inspired by my work on generative art and by OpenSCAD.
+OpenDraw is a code based drawing tool. It's inspired by my work on generative art and by the utility of OpenSCAD.
 
 ![OpenDraw Screenshot](opendraw.png)
+
+This is a very early alpha release that I'm experimenting on. It is not year ready for others.
 
 
 ## Installing
