@@ -16,6 +16,8 @@ I might create a simple Go server that serves the file on localhost and is avail
 
 ## Getting Started
 
+Write code in the pane on the left. Click the pane on the right to render.
+
 Here's a quick example program to get you started.
 
 OpenDraw drawings are written in JavaScript. The program includes a few helper functions to make your drawing code more concise.
