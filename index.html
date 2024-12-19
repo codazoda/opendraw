@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OpenDraw</title>
+
+    <!-- Internal CSS -->
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            background-color: rgb(225, 225, 225);
+            margin: 0; /* Remove default body margin */
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Full viewport height */
+        }
+
+		textarea:focus {
+			outline: none;
+		}
+
+        /* Container for the two columns */
+        .container {
+            display: flex;
+            flex: 1;
+            gap: 1rem; /* Space between columns */
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        /* Left Column Styling */
+        .left-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+			/* border: 1px solid red; */
+        }
+
+        .left-column textarea {
+            flex: 1;
+            margin: 1rem 0 1rem 1rem; /* Keep the margin around the textarea */
+            padding: 1rem 0 1rem 1rem;
+            resize: none;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: auto; /* Enable internal scrolling if content overflows */
+        }
+
+        /* Right Column Styling */
+        .right-column {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+			padding: 1rem 1rem 1rem 0;
+            /* border: 1px solid blue; */
+            overflow: hidden; /* Prevent canvas overflow */
+        }
+
+        .right-column canvas {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            border: 1px solid #000;
+        }
+
+		canvas {
+			background-color: white;
+		}
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .right-column {
+                height: 300px; /* Set a fixed height for smaller screens */
+            }
+
+            .right-column canvas {
+                max-height: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Container for Columns -->
+    <div class="container">
+        <!-- Left Column with Textarea -->
+        <div class="left-column">
+            <textarea id="code" placeholder="Enter your text here..." wrap="off"></textarea>
+        </div>
+
+        <!-- Right Column with Canvas -->
+        <div class="right-column">
+            <canvas id="drawingCanvas" width="2550" height="3300" onclick="render();"></canvas>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript to Handle Canvas Scaling -->
+    <script>
+        function resizeCanvas() {
+            const canvas = document.getElementById('drawingCanvas');
+            const parent = canvas.parentElement;
+            const ratio = canvas.width / canvas.height;
+
+            // Get the available width and height
+            const availableWidth = parent.clientWidth;
+            const availableHeight = parent.clientHeight;
+
+            if (availableWidth / availableHeight > ratio) {
+                // Width is the limiting factor
+                canvas.style.width = `${availableHeight * ratio}px`;
+                canvas.style.height = `${availableHeight}px`;
+            } else {
+                // Height is the limiting factor
+                canvas.style.width = `${availableWidth}px`;
+                canvas.style.height = `${availableWidth / ratio}px`;
+            }
+        }
+
+		function render() {
+			// Grab the text from the textarea
+			const code = document.getElementById('code');
+			var result;
+			// Execute it
+			try {
+				result = eval(code.value);
+			} catch (error) {
+				if (!result) {
+					alert('Error: ' + error.message + "\n\n" + error.stack);
+				}
+			}
+			// Show the result
+			console.log(result);
+			// Say we're done
+			console.log("Rendered");
+		}
+
+        // Initial resize
+        window.addEventListener('load', resizeCanvas);
+        // Resize on window resize
+        window.addEventListener('resize', resizeCanvas);
+    </script>
+
+</body>
+
+</html>
