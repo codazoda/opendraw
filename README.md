@@ -1,10 +1,12 @@
 # OpenDraw
 
-OpenDraw is a code based drawing tool. It's inspired by my work on generative art and by the fantastic OpenSCAD project. OpenDraw is for 2D drawing of binary images by writing code.
+OpenDraw is a code based drawing tool. It lets you draw 2D binary images by writing code.
 
 ![OpenDraw Screenshot](opendraw.png)
 
 This is a very early alpha release that I'm experimenting on. It is not year ready for others.
+
+It's inspired by my work on generative art and by the fantastic OpenSCAD project.
 
 
 ## Installing
